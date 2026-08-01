@@ -144,14 +144,16 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* 🛑 FIX: Replaced generic avatar with your actual logo */
+        /* 🛑 FIX: Increased chat avatar size to 65px for better visibility */
         .chat-header .avatar {
-            width: 45px;
-            height: 45px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
-            background: transparent;
+            background: #0d1424;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
+            flex-shrink: 0;
         }
         .chat-header .avatar img {
             width: 100%;
@@ -160,8 +162,8 @@
             display: block;
         }
 
-        .chat-header .info h4 { color: white; font-size: 1rem; margin-left: 0.5rem; }
-        .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; margin-left: 0.5rem; }
+        .chat-header .info h4 { color: white; font-size: 1rem; }
+        .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
 
         .chat-bubbles {
             padding-top: 1.5rem;
@@ -241,7 +243,6 @@
         <div class="right-side">
             <div class="phone-frame">
                 <div class="chat-header">
-                    <!-- 🛑 FIX: Your logo now lives here! -->
                     <div class="avatar">
                         <img src="liveai-logo.png" alt="Live AI Agent">
                     </div>
