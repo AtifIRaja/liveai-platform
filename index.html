@@ -18,22 +18,22 @@
             position: relative;
         }
 
-        /* TOP LEFT LOGO - FIXED SPACING */
+        /* TOP LEFT LOGO */
         .top-logo {
             position: absolute;
             top: 2.5rem;
             left: 2.5rem;
         }
         .top-logo img {
-            height: 110px;      /* Made slightly larger */
+            height: 110px;
             width: 110px;
             border-radius: 50%;
-            object-fit: cover;  /* Changed from contain to cover to fill the circle nicely */
+            object-fit: cover;
             background: #0d1424;
-            border: 2px solid rgba(255, 255, 255, 0.1); /* Added a subtle ring for definition */
+            border: 2px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
-            padding: 10px;      /* 🛑 FIX: This creates internal spacing so the text doesn't touch edges */
+            padding: 10px;
         }
         .top-logo img:hover { transform: scale(1.05); }
 
@@ -45,7 +45,7 @@
             gap: 4rem;
             align-items: center;
             justify-content: space-between;
-            margin-top: 130px;  /* Increased to account for bigger logo */
+            margin-top: 130px;
         }
 
         .left-side {
@@ -144,21 +144,24 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
+        /* 🛑 FIX: Replaced generic avatar with your actual logo */
         .chat-header .avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 0.8rem;
+            background: transparent;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .chat-header .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .chat-header .info h4 { color: white; font-size: 1rem; }
-        .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
+        .chat-header .info h4 { color: white; font-size: 1rem; margin-left: 0.5rem; }
+        .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; margin-left: 0.5rem; }
 
         .chat-bubbles {
             padding-top: 1.5rem;
@@ -238,7 +241,10 @@
         <div class="right-side">
             <div class="phone-frame">
                 <div class="chat-header">
-                    <div class="avatar">AI</div>
+                    <!-- 🛑 FIX: Your logo now lives here! -->
+                    <div class="avatar">
+                        <img src="liveai-logo.png" alt="Live AI Agent">
+                    </div>
                     <div class="info">
                         <h4>Live AI Agent</h4>
                         <p>Typically replies in seconds</p>
