@@ -19,14 +19,16 @@
             padding: 2rem;
         }
         
+        /* LOGO FIX: Matching the dark blue of your image so white text pops */
         .logo img {
             height: 120px;
             width: 120px;
             display: block;
-            margin: 0 auto 2.5rem auto;
+            margin: 0 auto 1.5rem auto; /* Reduced margin so it sits closer to the title */
             border-radius: 50%;
             object-fit: contain;
-            background: #ffffff;
+            background: #0d1424; /* This deep navy blue makes the white 'LIVE AI' text visible! */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* A subtle, professional shadow */
         }
 
         h1 {
@@ -34,7 +36,7 @@
             font-weight: 800;
             letter-spacing: -0.03em;
             color: #0a0a0a;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             line-height: 1.1;
         }
         
@@ -43,9 +45,9 @@
         .subtitle {
             font-size: 1.1rem;
             color: #475569;
-            max-width: 650px;
-            line-height: 1.5;
-            margin-bottom: 2rem;
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
         }
 
         .badge-container {
@@ -84,7 +86,7 @@
             transition: all 0.2s ease;
             border: 1px solid #0a0a0a;
         }
-        .btn-primary:hover { background: #2563eb; border-color: #2563eb; transform: translateY(-1px); }
+        .btn-primary:hover { background: #2563eb; border-color: #2563eb; transform: translateY(-2px); }
 
         .btn-outline {
             background: transparent;
