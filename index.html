@@ -8,16 +8,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #0d1424; /* Deep Navy - representing the "Darkness" */
+            background: #0d1424;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2rem;
+            position: relative;
         }
 
-        /* Main Container that holds both the Text and the Chat Preview */
+        /* TOP LEFT LOGO POSITION */
+        .top-logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+        }
+        .top-logo img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: #0d1424;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -28,7 +43,6 @@
             justify-content: space-between;
         }
 
-        /* Left Side: Text & Buttons */
         .left-side {
             flex: 1;
             min-width: 300px;
@@ -99,7 +113,6 @@
         }
         .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
-        /* Right Side: The Beautiful WhatsApp-Style Chat Preview */
         .right-side {
             flex: 1;
             min-width: 320px;
@@ -182,20 +195,25 @@
         .bubble:nth-child(2) { animation-delay: 0.8s; }
         .bubble:nth-child(3) { animation-delay: 1.4s; }
 
-        /* Responsive */
         @media (max-width: 900px) {
             .container { flex-direction: column; text-align: center; gap: 3rem; }
             .left-side p { margin: 0 auto 2.5rem auto; }
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
+            .top-logo { top: 1rem; left: 1rem; }
+            .top-logo img { height: 45px; width: 45px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- TOP LEFT LOGO -->
+    <div class="top-logo">
+        <img src="liveai-logo.png" alt="Live AI Logo">
+    </div>
+
     <div class="container">
         
-        <!-- Left Side: Text -->
         <div class="left-side">
             <h1><span class="highlight">Digital</span> Workforce</h1>
             <p>Deploy autonomous AI agents that think, collaborate, and execute across enterprise operations—from field assets to boardroom decisions.</p>
@@ -213,7 +231,6 @@
             </div>
         </div>
 
-        <!-- Right Side: The Chat Preview -->
         <div class="right-side">
             <div class="phone-frame">
                 <div class="chat-header">
