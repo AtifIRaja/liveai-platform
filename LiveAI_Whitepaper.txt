@@ -1,0 +1,15 @@
+LIVE AI — DIGITAL WORKFORCE
+
+Agentic OS Architecture & Technical Overview
+
+1. Mission: Deploy autonomous AI agents that think, collaborate, and execute across enterprise operations.
+
+2. The Core Engine: Built on Hermes, Python, and OpenAI. Deploys specialized agents (Energy, Fleet, Ag, Marketing) and orchestrates multi-step workflows.
+
+3. Security Protocol: All clients vetted via a verification gate before receiving a pairing code.
+
+4. Agentic Workflow: Deploys specialized agents to analyze data, implement actions, and recover revenue.
+
+5. Contact & Onboarding: Visit atifiraja.github.io/liveai-platform/ and click 'Chat with Agent'.
+
+For the full architecture guide, request the detailed technical appendix.
