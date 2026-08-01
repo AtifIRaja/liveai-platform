@@ -18,24 +18,22 @@
             position: relative;
         }
 
-        /* TOP LEFT LOGO - ENLARGED */
+        /* TOP LEFT LOGO */
         .top-logo {
             position: absolute;
             top: 2.5rem;
             left: 2.5rem;
         }
         .top-logo img {
-            height: 100px;    /* Much larger */
+            height: 100px;
             width: 100px;
             border-radius: 50%;
             object-fit: contain;
             background: #0d1424;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Deeper shadow for depth */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
         }
-        .top-logo img:hover {
-            transform: scale(1.05); /* Subtle zoom on hover */
-        }
+        .top-logo img:hover { transform: scale(1.05); }
 
         .container {
             display: flex;
@@ -45,7 +43,8 @@
             gap: 4rem;
             align-items: center;
             justify-content: space-between;
-            padding-top: 2rem; /* Push content slightly down to balance the larger logo */
+            /* 🛑 THE FIX: Add this margin to push the text down below the logo */
+            margin-top: 100px; 
         }
 
         .left-side {
@@ -201,7 +200,7 @@
         .bubble:nth-child(3) { animation-delay: 1.4s; }
 
         @media (max-width: 900px) {
-            .container { flex-direction: column; text-align: center; gap: 3rem; padding-top: 4rem; }
+            .container { flex-direction: column; text-align: center; gap: 3rem; margin-top: 80px; }
             .left-side p { margin: 0 auto 2.5rem auto; }
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
@@ -212,7 +211,7 @@
 </head>
 <body>
 
-    <!-- TOP LEFT LOGO - ENLARGED -->
+    <!-- TOP LEFT LOGO -->
     <div class="top-logo">
         <img src="liveai-logo.png" alt="Live AI Logo">
     </div>
