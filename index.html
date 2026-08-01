@@ -18,6 +18,7 @@
             position: relative;
         }
 
+        /* ===== LOGO ===== */
         .liveai-badge {
             display: flex;
             justify-content: center;
@@ -47,18 +48,25 @@
         }
         .top-logo .liveai-badge:hover { transform: scale(1.05); }
 
+        /* ===== CONTAINER ===== */
         .container {
             display: flex;
             flex-wrap: wrap;
             max-width: 1200px;
             width: 100%;
             gap: 3rem;
-            align-items: center;
+            align-items: flex-start; /* 🛑 FIX: Aligns to top to stop jumping */
             justify-content: space-between;
             margin-top: 120px;
         }
 
-        .left-side { flex: 1; min-width: 300px; }
+        /* ===== LEFT SIDE (Fixed to top) ===== */
+        .left-side { 
+            flex: 1; 
+            min-width: 300px;
+            position: sticky; /* Helps hold it in place on large screens */
+            top: 0;
+        }
 
         .left-side h1 {
             font-size: 3.5rem;
@@ -125,12 +133,13 @@
         }
         .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
+        /* ===== RIGHT SIDE (Fixed height scroll container) ===== */
         .right-side {
             flex: 1;
             min-width: 320px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* 🛑 FIX: Keeps it locked to the top */
         }
 
         .phone-frame {
@@ -141,7 +150,11 @@
             max-width: 400px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             position: relative;
-            min-height: 450px;
+            
+            /* 🛑 CRITICAL FIX: Locks the height and prevents layout shifts */
+            height: 500px; 
+            display: flex;
+            flex-direction: column;
         }
 
         .chat-header {
@@ -150,6 +163,7 @@
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0; /* Prevents header from squishing */
         }
 
         .chat-header .liveai-badge {
@@ -161,11 +175,22 @@
         .chat-header .info h4 { color: white; font-size: 1rem; }
         .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
 
+        /* 🛑 FIX: The scrolling area for the messages */
         .chat-bubbles {
             padding-top: 1.5rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            overflow-y: auto; /* Enables internal scrolling */
+            flex-grow: 1; /* Fills the remaining space perfectly */
+            padding-bottom: 1rem;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide the ugly scrollbar to keep it clean */
+        .chat-bubbles::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
         }
 
         .bubble {
@@ -198,7 +223,6 @@
             border-bottom-right-radius: 4px;
         }
 
-        /* Agentic Reasoning Step Indicators */
         .bubble.thinking {
             background: transparent;
             color: #60a5fa;
@@ -208,25 +232,30 @@
             font-size: 0.8rem;
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            .container { flex-direction: column; text-align: center; gap: 3rem; margin-top: 80px; }
+            .container { flex-direction: column; text-align: center; gap: 3rem; margin-top: 80px; align-items: center; }
             .left-side p { margin: 0 auto 2.5rem auto; }
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
             .top-logo { top: 1.5rem; left: 1.5rem; }
             .top-logo .liveai-badge { width: 70px; height: 70px; font-size: 0.8rem; }
             .chat-header .liveai-badge { width: 45px; height: 45px; font-size: 0.65rem; }
+            .phone-frame { height: 450px; } /* Slightly shorter on mobile */
         }
     </style>
 </head>
 <body>
 
+    <!-- ===== TOP LEFT LOGO ===== -->
     <div class="top-logo">
         <div class="liveai-badge">LIVE<br>AI</div>
     </div>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <div class="container">
         
+        <!-- LEFT SIDE -->
         <div class="left-side">
             <h1><span class="highlight">Digital</span> Workforce</h1>
             <p>Deploy autonomous AI agents that think, collaborate, and execute across enterprise operations—from field assets to boardroom decisions.</p>
@@ -244,6 +273,7 @@
             </div>
         </div>
 
+        <!-- RIGHT SIDE -->
         <div class="right-side">
             <div class="phone-frame">
                 <div class="chat-header">
@@ -253,6 +283,7 @@
                         <p>Agentic Workflow Active</p>
                     </div>
                 </div>
+                <!-- 🛑 FIXED: This now has a scrollbar and fixed height -->
                 <div class="chat-bubbles" id="chatContainer">
                     <!-- Bubbles generated by JavaScript -->
                 </div>
@@ -286,7 +317,6 @@
                 const bubble = document.createElement('div');
                 bubble.className = `bubble ${msg.role}`;
                 
-                // If thinking, hide text initially to look like real compute
                 if (msg.role === 'thinking') {
                     bubble.textContent = '⏳ Thinking...';
                     setTimeout(() => { bubble.textContent = msg.text; }, 800);
@@ -296,13 +326,15 @@
 
                 chatContainer.appendChild(bubble);
                 
-                // Trigger slide-up animation
-                setTimeout(() => { bubble.classList.add('visible'); }, 100);
+                setTimeout(() => { 
+                    bubble.classList.add('visible'); 
+                    // 🛑 FIX: Auto-scrolls to the bottom when a new message appears
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, 100);
 
                 step++;
                 
-                // Wait before next message based on role
-                let delay = 2500; // Default
+                let delay = 2500;
                 if (msg.role === 'thinking') delay = 3000;
                 if (msg.role === 'ai') delay = 4000;
                 if (msg.role === 'user') delay = 3500;
@@ -311,7 +343,6 @@
             }
         }
 
-        // Start the demo 1 second after page load
         setTimeout(addMessage, 1000);
     </script>
 
