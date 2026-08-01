@@ -18,20 +18,22 @@
             position: relative;
         }
 
-        /* TOP LEFT LOGO */
+        /* TOP LEFT LOGO - FIXED SPACING */
         .top-logo {
             position: absolute;
             top: 2.5rem;
             left: 2.5rem;
         }
         .top-logo img {
-            height: 100px;
-            width: 100px;
+            height: 110px;      /* Made slightly larger */
+            width: 110px;
             border-radius: 50%;
-            object-fit: contain;
+            object-fit: cover;  /* Changed from contain to cover to fill the circle nicely */
             background: #0d1424;
+            border: 2px solid rgba(255, 255, 255, 0.1); /* Added a subtle ring for definition */
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
+            padding: 10px;      /* 🛑 FIX: This creates internal spacing so the text doesn't touch edges */
         }
         .top-logo img:hover { transform: scale(1.05); }
 
@@ -43,8 +45,7 @@
             gap: 4rem;
             align-items: center;
             justify-content: space-between;
-            /* 🛑 THE FIX: Add this margin to push the text down below the logo */
-            margin-top: 100px; 
+            margin-top: 130px;  /* Increased to account for bigger logo */
         }
 
         .left-side {
@@ -205,13 +206,12 @@
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
             .top-logo { top: 1.5rem; left: 1.5rem; }
-            .top-logo img { height: 70px; width: 70px; }
+            .top-logo img { height: 70px; width: 70px; padding: 5px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- TOP LEFT LOGO -->
     <div class="top-logo">
         <img src="liveai-logo.png" alt="Live AI Logo">
     </div>
