@@ -139,28 +139,30 @@
         .chat-header {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem; /* Increased gap for better spacing */
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* 🛑 FINAL FIX: Big, readable, glowing logo for the chat */
+        /* CHAT AVATAR FIX: object-fit: contain prevents cropping */
         .chat-header .avatar {
-            width: 85px;          /* Much larger for readability */
+            width: 85px;
             height: 85px;
             border-radius: 50%;
             background: #0d1424;
             overflow: hidden;
-            border: 3px solid rgba(96, 165, 250, 0.4); /* Thicker blue glow */
+            border: 2px solid rgba(96, 165, 250, 0.4);
             box-shadow: 0 0 25px rgba(96, 165, 250, 0.2);
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .chat-header .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;  /* Ensures text is not cut off */
+            width: 85px;
+            height: 85px;
+            object-fit: contain; /* 🛑 FIX: Prevents the text from getting cropped! */
             display: block;
-            background: #0d1424;  /* Matches the dark bg so text pops */
         }
 
         .chat-header .info h4 { color: white; font-size: 1.1rem; }
@@ -213,7 +215,6 @@
             .btn-group { justify-content: center; }
             .top-logo { top: 1.5rem; left: 1.5rem; }
             .top-logo img { height: 70px; width: 70px; padding: 5px; }
-            .chat-header .avatar { width: 65px; height: 65px; }
         }
     </style>
 </head>
