@@ -8,43 +8,46 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: #ffffff;
-            color: #0a0a0a;
-            /* Changed from 100vh to min-height, and removed flex centering to push content from top */
+            background: #0d1424; /* Deep Navy - representing the "Darkness" */
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 4rem 2rem; /* Adds top padding so the logo is safely visible */
-        }
-        
-        .logo img {
-            height: 120px;
-            width: 120px;
-            display: block;
-            margin: 0 auto 2rem auto;
-            border-radius: 50%;
-            object-fit: contain;
-            background: #0d1424;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 2rem;
         }
 
-        h1 {
-            font-size: 3.5rem;
+        /* Main Container that holds both the Text and the Chat Preview */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            width: 100%;
+            gap: 4rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Left Side: Text & Buttons */
+        .left-side {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .left-side h1 {
+            font-size: 4rem;
             font-weight: 800;
             letter-spacing: -0.03em;
-            color: #0a0a0a;
-            margin-bottom: 0.8rem;
             line-height: 1.1;
+            margin-bottom: 1.5rem;
         }
-        
-        .highlight { color: #2563eb; }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #475569;
-            max-width: 700px;
+        .highlight { color: #60a5fa; }
+
+        .left-side p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 500px;
             line-height: 1.6;
             margin-bottom: 2.5rem;
         }
@@ -53,13 +56,12 @@
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            justify-content: center;
             margin-bottom: 2.5rem;
         }
 
         .badge {
-            background: #f1f5f9;
-            color: #334155;
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
             padding: 0.4rem 1.2rem;
             border-radius: 50px;
             font-size: 0.8rem;
@@ -70,91 +72,165 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 3rem;
         }
 
         .btn-primary {
-            background: #0a0a0a;
-            color: #ffffff;
-            padding: 0.9rem 2.5rem;
+            background: #ffffff;
+            color: #0d1424;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
-            transition: all 0.2s ease;
-            border: 1px solid #0a0a0a;
+            transition: all 0.3s ease;
         }
-        .btn-primary:hover { background: #2563eb; border-color: #2563eb; transform: translateY(-2px); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
 
         .btn-outline {
             background: transparent;
-            color: #0a0a0a;
-            border: 1px solid #e2e8f0;
-            padding: 0.9rem 2.5rem;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
-        .btn-outline:hover { background: #f8fafc; border-color: #94a3b8; }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
-        .qr-section {
+        /* Right Side: The Beautiful WhatsApp-Style Chat Preview */
+        .right-side {
+            flex: 1;
+            min-width: 320px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 2rem;
+        }
+
+        .phone-frame {
+            background: #1e293b;
+            padding: 1.5rem;
+            border-radius: 40px;
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
         }
 
-        .qr-section p {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 1rem;
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .qr-placeholder {
-            width: 120px;
-            height: 120px;
-            border: 2px dashed #cbd5e1;
-            border-radius: 12px;
+        .chat-header .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
+            font-weight: bold;
+            color: white;
             font-size: 0.8rem;
+        }
+
+        .chat-header .info h4 { color: white; font-size: 1rem; }
+        .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
+
+        .chat-bubbles {
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .bubble {
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .bubble.user {
+            background: #334155;
+            color: #e2e8f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bubble.ai {
+            background: #3b82f6;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bubble:nth-child(1) { animation-delay: 0.2s; }
+        .bubble:nth-child(2) { animation-delay: 0.8s; }
+        .bubble:nth-child(3) { animation-delay: 1.4s; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; text-align: center; gap: 3rem; }
+            .left-side p { margin: 0 auto 2.5rem auto; }
+            .badge-container { justify-content: center; }
+            .btn-group { justify-content: center; }
         }
     </style>
 </head>
 <body>
-    
-    <div class="logo"><img src="liveai-logo.png" alt="Live AI Logo"></div>
-    
-    <h1><span class="highlight">Digital Workforce</span></h1>
-    
-    <p class="subtitle">
-        Deploy Digital Employees. Scale Real Businesses.<br><br>
-        AI agents that think, collaborate, and execute across enterprise operations—<br>from field assets to boardroom decisions.
-    </p>
 
-    <div class="badge-container">
-        <span class="badge">⚡ Energy &amp; Grids</span>
-        <span class="badge">🚛 Fleet &amp; Supply Chain</span>
-        <span class="badge">🌾 Smart Agriculture</span>
-        <span class="badge">📈 Digital Marketing</span>
-    </div>
+    <div class="container">
+        
+        <!-- Left Side: Text -->
+        <div class="left-side">
+            <h1><span class="highlight">Digital</span> Workforce</h1>
+            <p>Deploy autonomous AI agents that think, collaborate, and execute across enterprise operations—from field assets to boardroom decisions.</p>
+            
+            <div class="badge-container">
+                <span class="badge">⚡ Energy &amp; Grids</span>
+                <span class="badge">🚛 Fleet &amp; Supply Chain</span>
+                <span class="badge">🌾 Smart Agriculture</span>
+                <span class="badge">📈 Digital Marketing</span>
+            </div>
 
-    <div class="btn-group">
-        <a href="#" class="btn-primary">Chat with Agent</a>
-        <a href="#" class="btn-outline">Whitepaper →</a>
-    </div>
+            <div class="btn-group">
+                <a href="https://wa.me/923112011430" target="_blank" class="btn-primary">Chat with Agent</a>
+                <a href="#" class="btn-outline">Whitepaper →</a>
+            </div>
+        </div>
 
-    <div class="qr-section">
-        <p>Scan to connect</p>
-        <div class="qr-placeholder">[ QR CODE ]</div>
+        <!-- Right Side: The Chat Preview -->
+        <div class="right-side">
+            <div class="phone-frame">
+                <div class="chat-header">
+                    <div class="avatar">AI</div>
+                    <div class="info">
+                        <h4>Live AI Agent</h4>
+                        <p>Typically replies in seconds</p>
+                    </div>
+                </div>
+                <div class="chat-bubbles">
+                    <div class="bubble user">Can you help me automate my energy grid monitoring?</div>
+                    <div class="bubble ai">Absolutely. I can analyze real-time AMI data, detect revenue leaks, and predict load balancing failures 24 hours in advance.</div>
+                    <div class="bubble user">That's exactly what I need. How do I start?</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
