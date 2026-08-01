@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live AI — Digital Workforce</title>
     <style>
-        /* ===== RESET ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -19,15 +18,15 @@
             position: relative;
         }
 
-        /* ===== THE PERFECT LOGO COMPONENT (Used Twice) ===== */
+        /* ===== THE PERFECT LOGO ===== */
         .liveai-badge {
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            background: #0d1424; /* Matches the page background */
-            border: 3px solid rgba(96, 165, 250, 0.4);
-            box-shadow: 0 0 25px rgba(96, 165, 250, 0.2);
+            background: #0d1424;
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.15);
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-weight: 700;
             color: #ffffff;
@@ -35,7 +34,6 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             flex-shrink: 0;
-            padding: 0 10px; /* Prevents text from ever hitting the edges */
         }
 
         /* ===== TOP LEFT LOGO ===== */
@@ -45,12 +43,10 @@
             left: 2.5rem;
         }
         .top-logo .liveai-badge {
-            width: 110px;
-            height: 110px;
-            font-size: 1.2rem;
-            border-width: 2px;
+            width: 100px;
+            height: 100px;
+            font-size: 1.1rem;
             transition: transform 0.3s ease;
-            padding: 0 15px;
         }
         .top-logo .liveai-badge:hover { transform: scale(1.05); }
 
@@ -60,17 +56,17 @@
             flex-wrap: wrap;
             max-width: 1200px;
             width: 100%;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
             justify-content: space-between;
-            margin-top: 130px; /* Space to clear the top-left logo */
+            margin-top: 120px;
         }
 
         /* ===== LEFT SIDE ===== */
         .left-side { flex: 1; min-width: 300px; }
 
         .left-side h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -156,19 +152,19 @@
         .chat-header {
             display: flex;
             align-items: center;
-            gap: 1.2rem; /* Perfect breathing room */
+            gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* The Chat Logo Instance */
+        /* ===== SMALLER CHAT LOGO ===== */
         .chat-header .liveai-badge {
-            width: 75px;
-            height: 75px;
-            font-size: 0.9rem;
+            width: 55px;
+            height: 55px;
+            font-size: 0.75rem;
         }
 
-        .chat-header .info h4 { color: white; font-size: 1.1rem; }
+        .chat-header .info h4 { color: white; font-size: 1rem; }
         .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
 
         /* ===== CHAT BUBBLES ===== */
@@ -176,7 +172,7 @@
             padding-top: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .bubble {
@@ -185,8 +181,9 @@
             max-width: 85%;
             font-size: 0.9rem;
             line-height: 1.4;
-            animation: fadeIn 0.6s ease-out forwards;
             opacity: 0;
+            transform: translateY(15px);
+            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
         .bubble.user {
@@ -203,14 +200,14 @@
             border-bottom-right-radius: 4px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        /* ===== ANIMATION RESTORED ===== */
+        @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .bubble:nth-child(1) { animation-delay: 0.2s; }
-        .bubble:nth-child(2) { animation-delay: 0.8s; }
-        .bubble:nth-child(3) { animation-delay: 1.4s; }
+        .bubble:nth-child(1) { animation-delay: 0.3s; }
+        .bubble:nth-child(2) { animation-delay: 1.0s; }
+        .bubble:nth-child(3) { animation-delay: 1.7s; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
@@ -219,8 +216,8 @@
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
             .top-logo { top: 1.5rem; left: 1.5rem; }
-            .top-logo .liveai-badge { width: 70px; height: 70px; font-size: 0.9rem; }
-            .chat-header .liveai-badge { width: 60px; height: 60px; font-size: 0.7rem; }
+            .top-logo .liveai-badge { width: 70px; height: 70px; font-size: 0.8rem; }
+            .chat-header .liveai-badge { width: 45px; height: 45px; font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -263,9 +260,10 @@
                     </div>
                 </div>
                 <div class="chat-bubbles">
-                    <div class="bubble user">Can you help me automate my energy grid monitoring?</div>
-                    <div class="bubble ai">Absolutely. I can analyze real-time AMI data, detect revenue leaks, and predict load balancing failures 24 hours in advance.</div>
-                    <div class="bubble user">That's exactly what I need. How do I start?</div>
+                    <!-- Dynamic, Multi-Domain Chat Script -->
+                    <div class="bubble user">Can you help us reduce fuel costs in our cross-border fleet?</div>
+                    <div class="bubble ai">Absolutely. I can analyze real-time GPS and telematics data to optimize routes and reduce idle burn by up to 25%.</div>
+                    <div class="bubble user">How do we deploy this for 500 trucks?</div>
                 </div>
             </div>
         </div>
