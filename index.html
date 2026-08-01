@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live AI — Digital Workforce</title>
     <style>
+        /* ===== RESET ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -18,25 +19,42 @@
             position: relative;
         }
 
-        /* TOP LEFT LOGO */
+        /* ===== THE PERFECT LOGO COMPONENT (Used Twice) ===== */
+        .liveai-badge {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: #0d1424; /* Matches the page background */
+            border: 3px solid rgba(96, 165, 250, 0.4);
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.2);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            flex-shrink: 0;
+            padding: 0 10px; /* Prevents text from ever hitting the edges */
+        }
+
+        /* ===== TOP LEFT LOGO ===== */
         .top-logo {
             position: absolute;
             top: 2.5rem;
             left: 2.5rem;
         }
-        .top-logo img {
-            height: 110px;
+        .top-logo .liveai-badge {
             width: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #0d1424;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            height: 110px;
+            font-size: 1.2rem;
+            border-width: 2px;
             transition: transform 0.3s ease;
-            padding: 10px; /* Keeps text inside */
+            padding: 0 15px;
         }
-        .top-logo img:hover { transform: scale(1.05); }
+        .top-logo .liveai-badge:hover { transform: scale(1.05); }
 
+        /* ===== MAIN CONTAINER ===== */
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -45,13 +63,11 @@
             gap: 4rem;
             align-items: center;
             justify-content: space-between;
-            margin-top: 130px;
+            margin-top: 130px; /* Space to clear the top-left logo */
         }
 
-        .left-side {
-            flex: 1;
-            min-width: 300px;
-        }
+        /* ===== LEFT SIDE ===== */
+        .left-side { flex: 1; min-width: 300px; }
 
         .left-side h1 {
             font-size: 4rem;
@@ -118,6 +134,7 @@
         }
         .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
+        /* ===== RIGHT SIDE ===== */
         .right-side {
             flex: 1;
             min-width: 320px;
@@ -139,35 +156,22 @@
         .chat-header {
             display: flex;
             align-items: center;
-            gap: 1.2rem; /* More breathing room */
+            gap: 1.2rem; /* Perfect breathing room */
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* CHAT AVATAR FIX: object-fit: contain + no extra padding cropping */
-        .chat-header .avatar {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background: #0d1424;
-            overflow: hidden;
-            border: 3px solid rgba(96, 165, 250, 0.4);
-            box-shadow: 0 0 25px rgba(96, 165, 250, 0.2);
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .chat-header .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 🛑 CRITICAL FIX: This stops it from cutting off the text */
-            display: block;
+        /* The Chat Logo Instance */
+        .chat-header .liveai-badge {
+            width: 75px;
+            height: 75px;
+            font-size: 0.9rem;
         }
 
-        .chat-header .info h4 { color: white; font-size: 1.1rem; margin-top: 0; }
+        .chat-header .info h4 { color: white; font-size: 1.1rem; }
         .chat-header .info p { color: #94a3b8; font-size: 0.8rem; margin: 0; }
 
+        /* ===== CHAT BUBBLES ===== */
         .chat-bubbles {
             padding-top: 1.5rem;
             display: flex;
@@ -208,25 +212,29 @@
         .bubble:nth-child(2) { animation-delay: 0.8s; }
         .bubble:nth-child(3) { animation-delay: 1.4s; }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .container { flex-direction: column; text-align: center; gap: 3rem; margin-top: 80px; }
             .left-side p { margin: 0 auto 2.5rem auto; }
             .badge-container { justify-content: center; }
             .btn-group { justify-content: center; }
             .top-logo { top: 1.5rem; left: 1.5rem; }
-            .top-logo img { height: 70px; width: 70px; padding: 5px; }
-            .chat-header .avatar { width: 65px; height: 65px; }
+            .top-logo .liveai-badge { width: 70px; height: 70px; font-size: 0.9rem; }
+            .chat-header .liveai-badge { width: 60px; height: 60px; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ===== TOP LEFT LOGO ===== -->
     <div class="top-logo">
-        <img src="liveai-logo.png" alt="Live AI Logo">
+        <div class="liveai-badge">LIVE<br>AI</div>
     </div>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <div class="container">
         
+        <!-- LEFT SIDE -->
         <div class="left-side">
             <h1><span class="highlight">Digital</span> Workforce</h1>
             <p>Deploy autonomous AI agents that think, collaborate, and execute across enterprise operations—from field assets to boardroom decisions.</p>
@@ -244,12 +252,11 @@
             </div>
         </div>
 
+        <!-- RIGHT SIDE -->
         <div class="right-side">
             <div class="phone-frame">
                 <div class="chat-header">
-                    <div class="avatar">
-                        <img src="liveai-logo.png" alt="Live AI Agent">
-                    </div>
+                    <div class="liveai-badge">LIVE<br>AI</div>
                     <div class="info">
                         <h4>Live AI Agent</h4>
                         <p>Typically replies in seconds</p>
