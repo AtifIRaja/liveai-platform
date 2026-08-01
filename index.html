@@ -10,25 +10,24 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: #ffffff;
             color: #0a0a0a;
-            height: 100vh;
+            /* Changed from 100vh to min-height, and removed flex centering to push content from top */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem; /* Adds top padding so the logo is safely visible */
         }
         
-        /* LOGO FIX: Matching the dark blue of your image so white text pops */
         .logo img {
             height: 120px;
             width: 120px;
             display: block;
-            margin: 0 auto 1.5rem auto; /* Reduced margin so it sits closer to the title */
+            margin: 0 auto 2rem auto;
             border-radius: 50%;
             object-fit: contain;
-            background: #0d1424; /* This deep navy blue makes the white 'LIVE AI' text visible! */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* A subtle, professional shadow */
+            background: #0d1424;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         h1 {
