@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2Z Dispatch — Live AI Operations Portal</title>
+    <meta name="description" content="A2Z Dispatch LLC — AI-powered fleet dispatch portal. Pakistan & US operations.">
+    <meta name="theme-color" content="#0d1424">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://atifiraja.github.io/liveai-platform/liveai-logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #0d1424;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        .top-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem; border-bottom: 1px solid #1e293b;
+            position: sticky; top: 0; background: #0d1424; z-index: 100;
+        }
+        .brand { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.1rem; }
+        .brand img { width: 40px; height: 40px; border-radius: 8px; }
+        .brand .sub { font-size: 0.7rem; color: #60a5fa; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #60a5fa; }
+        .install-btn {
+            background: #3b82f6; color: white; border: none; padding: 0.5rem 1.2rem;
+            border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;
+        }
+        .install-btn:hover { background: #60a5fa; }
+
+        .hero {
+            padding: 4rem 2rem 3rem; text-align: center;
+            background: radial-gradient(ellipse at top, rgba(59,130,246,0.12), transparent 60%);
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+        .hero p { color: #94a3b8; font-size: 1.15rem; max-width: 700px; margin: 0 auto 2rem; }
+        .highlight { color: #60a5fa; }
+
+        .market-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem 3rem; }
+        .card {
+            background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 2rem;
+            transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-4px); border-color: #60a5fa; }
+        .card .flag { font-size: 2rem; margin-bottom: 0.75rem; }
+        .card h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .card .tag { color: #60a5fa; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+        .card p { color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
+        .card .features { list-style: none; margin-bottom: 1.5rem; }
+        .card .features li { padding: 0.4rem 0; color: #cbd5e1; font-size: 0.9rem; border-bottom: 1px solid #334155; }
+        .card .features li::before { content: "✓ "; color: #60a5fa; font-weight: 700; }
+        .btn {
+            display: inline-block; background: #3b82f6; color: white; text-decoration: none;
+            padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; text-align: center; font-size: 0.95rem;
+        }
+        .btn:hover { background: #60a5fa; }
+        .btn.secondary { background: transparent; border: 1px solid #334155; color: #cbd5e1; }
+        .btn.secondary:hover { border-color: #60a5fa; color: #60a5fa; }
+
+        .section-title { text-align: center; padding: 2rem 2rem 0; font-size: 1.8rem; font-weight: 700; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; max-width: 1200px; margin: 2rem auto; padding: 0 2rem 3rem; }
+        .feature {
+            background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem;
+        }
+        .feature .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .feature h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .feature p { color: #94a3b8; font-size: 0.85rem; line-height: 1.5; }
+
+        footer { text-align: center; padding: 2rem; border-top: 1px solid #1e293b; color: #64748b; font-size: 0.85rem; }
+        footer a { color: #60a5fa; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="brand">
+            <img src="https://atifiraja.github.io/liveai-platform/liveai-logo.png" alt="Live AI">
+            <div>
+                <div>A2Z Dispatch</div>
+                <div class="sub">Live AI Operations Portal</div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#pk" class="active">Pakistan</a>
+            <a href="#us">USA</a>
+            <button class="install-btn" id="installBtn" style="display:none">📱 Install App</button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>AI-Powered <span class="highlight">Fleet Dispatch</span><br>for Both Sides of the World</h1>
+        <p>One portal, two markets. A2Z Dispatch Pakistan & A2Z Dispatch LLC (USA) run on the same Live AI engine — WhatsApp-native, Halal-gated, FMCSA-compliant.</p>
+    </div>
+
+    <div class="market-cards">
+        <div class="card" id="pk">
+            <div class="flag">🇵🇰</div>
+            <h2>A2Z Dispatch — Pakistan</h2>
+            <div class="tag">WhatsApp-First • Urdu + English</div>
+            <p>24/7 AI dispatcher for Pakistani fleets. Load search, rate negotiation in PKR, driver comms on WhatsApp, emergency escalation.</p>
+            <ul class="features">
+                <li>Load add & rate recommendation (PKR)</li>
+                <li>Dispatch confirmation with owner approval</li>
+                <li>Driver updates & emergency escalation</li>
+                <li>Route assistance — NHA tolls, low bridges</li>
+                <li>Full audit trail in Fleet SoR</li>
+            </ul>
+            <a class="btn" href="portal-pk.html">Open Pakistan Portal →</a>
+        </div>
+
+        <div class="card" id="us">
+            <div class="flag">🇺🇸</div>
+            <h2>A2Z Dispatch LLC — USA</h2>
+            <div class="tag">FMCSA Compliant • Per-Mile USD</div>
+            <p>AI dispatcher for US fleets. DAT/Truckstop load boards, per-mile USD rates, Halal Cargo Gate, FMCSA HOS compliance, factoring-ready payments.</p>
+            <ul class="features">
+                <li>DAT & Truckstop load board gateway</li>
+                <li>Per-mile USD rate negotiation</li>
+                <li>Halal Cargo Gate — no alcohol/pork/gambling</li>
+                <li>FMCSA Hours-of-Service checks</li>
+                <li>MC/DOT tracking & broker reputation</li>
+            </ul>
+            <a class="btn" href="portal-us.html">Open US Portal →</a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Powered by the Live AI Digital Workforce</h2>
+    <div class="features-grid">
+        <div class="feature"><div class="icon">🕌</div><h3>Halal Gate</h3><p>Every load screened — no riba, no deception, no haram cargo.</p></div>
+        <div class="feature"><div class="icon">👤</div><h3>Human-in-the-Loop</h3><p>Every dispatch and rate requires owner approval. AI recommends, you decide.</p></div>
+        <div class="feature"><div class="icon">💬</div><h3>WhatsApp Native</h3><p>Drivers and owners operate via WhatsApp — no new apps to learn.</p></div>
+        <div class="feature"><div class="icon">📊</div><h3>System of Record</h3><p>Every load, negotiation, and dispatch logged with timestamps. Full audit.</p></div>
+    </div>
+
+    <footer>
+        <p>© 2026 A2Z Dispatch / Live AI — <a href="https://atifiraja.github.io/liveai-platform/">atifiraja.github.io/liveai-platform</a></p>
+    </footer>
+
+    <script>
+        // PWA Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'inline-block';
+        });
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                document.getElementById('installBtn').style.display = 'none';
+            }
+        });
+    </script>
+
+
+<script>
+        // Register service worker
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>

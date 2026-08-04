@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2Z Dispatch Pakistan — Portal</title>
+    <meta name="theme-color" content="#0d1424">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0d1424; color: #fff; min-height: 100vh; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid #1e293b; position: sticky; top: 0; background: #0d1424; z-index: 100; }
+        .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
+        .brand img { width: 34px; height: 34px; border-radius: 6px; }
+        .brand .sub { font-size: 0.65rem; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.08em; }
+        .back { color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+        .back:hover { color: #60a5fa; }
+
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; }
+        .stat .label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+        .stat .value { font-size: 1.8rem; font-weight: 700; margin-top: 0.3rem; }
+        .stat .value.green { color: #22c55e; }
+        .stat .value.blue { color: #60a5fa; }
+        .stat .value.amber { color: #f59e0b; }
+        .stat .value.red { color: #ef4444; }
+
+        .panel { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .panel h3 { font-size: 1.1rem; margin-bottom: 1rem; color: #e2e8f0; }
+        .cmd { background: #0d1424; border: 1px solid #334155; border-radius: 8px; padding: 0.8rem 1rem; font-family: monospace; font-size: 0.85rem; color: #60a5fa; margin-bottom: 0.6rem; overflow-x: auto; white-space: nowrap; }
+        .cmd .desc { color: #94a3b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: block; margin-bottom: 0.2rem; font-size: 0.8rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .live-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #334155; font-size: 0.9rem; }
+        .live-row .load { color: #cbd5e1; }
+        .live-row .status { font-weight: 600; }
+        .status.active { color: #22c55e; }
+        .status.pending { color: #f59e0b; }
+        .status.rejected { color: #ef4444; }
+        .note { color: #64748b; font-size: 0.8rem; margin-top: 0.5rem; }
+        a.btn { display: inline-block; background: #3b82f6; color: white; text-decoration: none; padding: 0.7rem 1.3rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        a.btn:hover { background: #60a5fa; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="brand">
+            <img src="https://atifiraja.github.io/liveai-platform/liveai-logo.png" alt="Live AI">
+            <div><div>A2Z Dispatch 🇵🇰</div><div class="sub">Pakistan Operations</div></div>
+        </div>
+        <a class="back" href="index.html">← All Markets</a>
+    </div>
+
+    <div class="dashboard">
+        <div class="stats">
+            <div class="stat"><div class="label">Active Loads</div><div class="value blue" id="statLoads">—</div></div>
+            <div class="stat"><div class="label">Dispatches</div><div class="value green" id="statDisp">—</div></div>
+            <div class="stat"><div class="label">Pending Approvals</div><div class="value amber" id="statAppr">—</div></div>
+            <div class="stat"><div class="label">Escalations</div><div class="value red" id="statEsc">—</div></div>
+        </div>
+
+        <div class="panel">
+            <h3>🚚 WhatsApp Commands — Pakistan Fleet</h3>
+            <div class="cmd"><span class="desc">Add load (Karachi → Lahore, cement, 25 tons)</span>load LD-2026-0100 Karachi Lahore Cement 25 95000 110000 90000</div>
+            <div class="cmd"><span class="desc">Get recommendation (Accept / Negotiate / Reject)</span>recommend LD-2026-0100</div>
+            <div class="cmd"><span class="desc">Confirm dispatch (requires owner approval)</span>dispatch LD-2026-0100 Imran TRA-4412 Karachi Lahore 95000</div>
+            <div class="cmd"><span class="desc">Driver update / emergency</span>driver LD-2026-0100 Imran breakdown Tyre burst near Sahiwal</div>
+            <div class="cmd"><span class="desc">Live status (Urdu bhi chalega: halat)</span>status</div>
+            <p class="note">Rates in PKR • WhatsApp +923112011430 • Urdu & English supported</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="panel">
+                <h3>📋 Live Loads</h3>
+                <div id="loadsList"><p class="note">Loading…</p></div>
+            </div>
+            <div class="panel">
+                <h3>🛡️ Governance</h3>
+                <div class="live-row"><span class="load">Human-in-the-Loop</span><span class="status active">ENFORCED</span></div>
+                <div class="live-row"><span class="load">Halal Gate</span><span class="status active">ENFORCED</span></div>
+                <div class="live-row"><span class="load">SoR Audit Trail</span><span class="status active">ACTIVE</span></div>
+                <div class="live-row"><span class="load">Urdu + English</span><span class="status active">SUPPORTED</span></div>
+                <div style="margin-top:1rem"><a class="btn" href="https://atifiraja.github.io/liveai-platform/">Visit Live AI Platform →</a></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo data — replace with live API when available
+        const demoLoads = [
+            { ref: "LD-2026-0300", route: "Karachi → Lahore", cargo: "Cement", status: "dispatched", cls: "active" },
+            { ref: "LD-2026-0400", route: "Islamabad → Multan", cargo: "Wheat", status: "pending approval", cls: "pending" },
+            { ref: "DEMO-1001", route: "Karachi → Lahore", cargo: "Cement", status: "pending approval", cls: "pending" },
+            { ref: "LD-2026-0200", route: "Karachi → Lahore", cargo: "Cement", status: "rejected (rate)", cls: "rejected" },
+        ];
+        document.getElementById('statLoads').textContent = demoLoads.length;
+        document.getElementById('statDisp').textContent = "4";
+        document.getElementById('statAppr').textContent = "2";
+        document.getElementById('statEsc').textContent = "1";
+
+        const listEl = document.getElementById('loadsList');
+        listEl.innerHTML = demoLoads.map(l =>
+            `<div class="live-row"><span class="load">${l.ref} • ${l.route}<br><small>${l.cargo}</small></span><span class="status ${l.cls}">${l.status}</span></div>`
+        ).join('');
+    </script>
+
+
+<script>
+        // Register service worker
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>

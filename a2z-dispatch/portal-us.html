@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2Z Dispatch LLC USA — Portal</title>
+    <meta name="theme-color" content="#0d1424">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0d1424; color: #fff; min-height: 100vh; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid #1e293b; position: sticky; top: 0; background: #0d1424; z-index: 100; }
+        .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; }
+        .brand img { width: 34px; height: 34px; border-radius: 6px; }
+        .brand .sub { font-size: 0.65rem; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.08em; }
+        .back { color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+        .back:hover { color: #60a5fa; }
+
+        .dashboard { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; }
+        .stat .label { color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+        .stat .value { font-size: 1.8rem; font-weight: 700; margin-top: 0.3rem; }
+        .stat .value.green { color: #22c55e; }
+        .stat .value.blue { color: #60a5fa; }
+        .stat .value.amber { color: #f59e0b; }
+        .stat .value.red { color: #ef4444; }
+
+        .panel { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .panel h3 { font-size: 1.1rem; margin-bottom: 1rem; color: #e2e8f0; }
+        .cmd { background: #0d1424; border: 1px solid #334155; border-radius: 8px; padding: 0.8rem 1rem; font-family: monospace; font-size: 0.85rem; color: #60a5fa; margin-bottom: 0.6rem; overflow-x: auto; white-space: nowrap; }
+        .cmd .desc { color: #94a3b8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: block; margin-bottom: 0.2rem; font-size: 0.8rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .live-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #334155; font-size: 0.9rem; }
+        .live-row .load { color: #cbd5e1; }
+        .live-row .status { font-weight: 600; }
+        .status.active { color: #22c55e; }
+        .status.pending { color: #f59e0b; }
+        .status.rejected { color: #ef4444; }
+        .status.halal { color: #22c55e; }
+        .note { color: #64748b; font-size: 0.8rem; margin-top: 0.5rem; }
+        a.btn { display: inline-block; background: #3b82f6; color: white; text-decoration: none; padding: 0.7rem 1.3rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        a.btn:hover { background: #60a5fa; }
+        .badge { display: inline-block; background: #0f172a; border: 1px solid #334155; border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.7rem; color: #94a3b8; margin-left: 0.4rem; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="brand">
+            <img src="https://atifiraja.github.io/liveai-platform/liveai-logo.png" alt="Live AI">
+            <div><div>A2Z Dispatch LLC 🇺🇸</div><div class="sub">USA Operations</div></div>
+        </div>
+        <a class="back" href="index.html">← All Markets</a>
+    </div>
+
+    <div class="dashboard">
+        <div class="stats">
+            <div class="stat"><div class="label">Loads Screened</div><div class="value blue" id="statLoads">—</div></div>
+            <div class="stat"><div class="label">Halal Rejected</div><div class="value red" id="statHalal">—</div></div>
+            <div class="stat"><div class="label">Pending Approvals</div><div class="value amber" id="statAppr">—</div></div>
+            <div class="stat"><div class="label">Est. Revenue</div><div class="value green" id="statRev">—</div></div>
+        </div>
+
+        <div class="panel">
+            <h3>🚚 WhatsApp Commands — US Fleet</h3>
+            <div class="cmd"><span class="desc">Add load (Dallas,TX → Atlanta,GA, per-mile USD)</span>load US-2003 Dallas,TX Atlanta,GA General freight 42000 780 2.10 2.35 1.95</div>
+            <div class="cmd"><span class="desc">Recommend with FMCSA check (driver, hours left)</span>recommend US-2003 Mike 9</div>
+            <div class="cmd"><span class="desc">Confirm dispatch (requires owner approval)</span>dispatch US-2003 Mike TRK-7788 Dallas Atlanta 2.10</div>
+            <div class="cmd"><span class="desc">Driver update / emergency</span>driver US-2003 Mike accident Fender bender at rest stop</div>
+            <div class="cmd"><span class="desc">Live status</span>status</div>
+            <p class="note">Rates in USD per mile • Halal Gate + FMCSA automatic • Load boards: DAT / Truckstop</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="panel">
+                <h3>📋 Load Board Feed <span class="badge">MOCK</span></h3>
+                <div id="loadsList"><p class="note">Loading…</p></div>
+            </div>
+            <div class="panel">
+                <h3>🛡️ Compliance</h3>
+                <div class="live-row"><span class="load">Halal Cargo Gate</span><span class="status active">ENFORCED</span></div>
+                <div class="live-row"><span class="load">FMCSA HOS</span><span class="status active">CHECKED</span></div>
+                <div class="live-row"><span class="load">Per-Mile USD</span><span class="status active">ACTIVE</span></div>
+                <div class="live-row"><span class="load">DAT / Truckstop</span><span class="status pending">PENDING API KEY</span></div>
+                <div class="live-row"><span class="load">Factoring</span><span class="status pending">ROADMAP</span></div>
+                <div style="margin-top:1rem"><a class="btn" href="https://atifiraja.github.io/liveai-platform/">Visit Live AI Platform →</a></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo data — replace with live API when available
+        const demoLoads = [
+            { ref: "DAT-385573", route: "Dallas,TX → Atlanta,GA", cargo: "General freight", rate: "$2.06/mi", status: "HALAL OK", cls: "halal" },
+            { ref: "DAT-630862", route: "Dallas,TX → Atlanta,GA", cargo: "Auto parts", rate: "$2.28/mi", status: "HALAL OK", cls: "halal" },
+            { ref: "TRUCKSTOP-552111", route: "Chicago,IL → NewYork,NY", cargo: "Pork products", rate: "$2.40/mi", status: "⛔ HALAL REJECT", cls: "rejected" },
+            { ref: "DAT-316261", route: "Chicago,IL → NewYork,NY", cargo: "Wine cases", rate: "$2.55/mi", status: "⛔ HALAL REJECT", cls: "rejected" },
+            { ref: "TRUCKSTOP-292806", route: "Dallas,TX → Atlanta,GA", cargo: "Electronics", rate: "$2.31/mi", status: "HALAL OK", cls: "halal" },
+        ];
+        const halalCount = demoLoads.filter(l => l.status.includes('REJECT')).length;
+        document.getElementById('statLoads').textContent = demoLoads.length;
+        document.getElementById('statHalal').textContent = halalCount;
+        document.getElementById('statAppr').textContent = "2";
+        document.getElementById('statRev').textContent = "$4,865";
+
+        const listEl = document.getElementById('loadsList');
+        listEl.innerHTML = demoLoads.map(l =>
+            `<div class="live-row"><span class="load">${l.ref} • ${l.route}<br><small>${l.cargo} • ${l.rate}</small></span><span class="status ${l.cls}">${l.status}</span></div>`
+        ).join('');
+    </script>
+
+
+<script>
+        // Register service worker
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("sw.js").catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>
